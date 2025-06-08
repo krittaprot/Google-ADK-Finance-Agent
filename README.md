@@ -1,295 +1,291 @@
-# Financial Agent with YFinance Tools
+# ADK Finance Agent - Full Stack Application
 
-Adapted from: https://docs.agno.com/examples/agents/finance-agent
+A complete financial analysis application built with Google Agent Development Kit (ADK), featuring a modern Streamlit web interface and a powerful finance agent backend with real-time market data integration.
 
-A powerful financial analysis assistant built with Google ADK (Agent Development Kit) and integrated with YFinance for real-time market data.
+## 🏗️ Architecture Overview
 
-## Features
+This project consists of two main components:
 
-🔍 **Real-time Stock Data**
-- Current stock prices with currency information
-- Live market data during trading hours
+### 🎨 **Frontend** (`app.py`)
+- **Streamlit Web Interface**: Modern, interactive chat UI
+- **Real-time Streaming**: Live streaming of agent responses with visual indicators
+- **Tool Execution Visualization**: Chronological display of tool calls with expandable results
+- **Session Management**: Create and manage ADK agent sessions
+- **Error Handling**: Robust error handling and user feedback
 
-📊 **Company Analysis**
-- Comprehensive company profiles and business information
-- Key financial metrics and ratios
-- Market capitalization and trading statistics
+### 🤖 **Backend** (`finance_agent/`)
+- **ADK Agent**: Powered by Google Agent Development Kit
+- **YFinance Integration**: Real-time market data and financial analysis
+- **Comprehensive Tools**: Stock prices, company info, historical data, fundamentals, news
+- **OpenRouter LLM**: Advanced language model integration for financial analysis
 
-📈 **Historical Data**
-- Historical stock prices with customizable time periods
-- Support for different data intervals (daily, weekly, monthly)
-- Trend analysis capabilities
+## 🚀 Quick Start
 
-💰 **Financial Fundamentals**
-- P/E ratios, EPS, and other key metrics
-- Debt-to-equity ratios and profitability margins
-- Return on equity and assets analysis
-- Income statement analysis
-- Key financial ratios
-- Analyst recommendations
-- Technical indicator analysis
+### Prerequisites
 
-📰 **Market News**
-- Latest company news and press releases
-- Market developments and announcements
-- Configurable number of news stories
+1. **Python 3.8+** with pip
+2. **OpenRouter API Key** (for LLM access)
+3. **Internet connection** (for real-time market data)
 
-## Setup
+### Installation
 
-### 1. Install Dependencies
+1. **Clone and setup the project**:
+   ```bash
+   git clone <repository-url>
+   cd Google-ADK-Agents
+   pip install -r requirements.txt
+   ```
 
-```bash
-pip install -r requirements.txt
-```
+2. **Configure environment variables**:
+   Create a `.env` file in the `finance_agent/` directory:
+   ```env
+   OPENROUTER_API_KEY=your_openrouter_api_key_here
+   OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+   ```
 
-### 2. Environment Configuration
+3. **Verify YFinance installation**:
+   ```python
+   import yfinance as yf
+   stock = yf.Ticker("AAPL")
+   print(stock.info.get("regularMarketPrice"))
+   ```
 
-Create a `.env` file in the project root with your OpenRouter API credentials:
+### Running the Application
 
-```env
-OPENROUTER_API_KEY=your_openrouter_api_key_here
-OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
-```
+#### Option 1: Full Stack (Recommended)
 
-### 3. Verify Installation
+1. **Start the ADK agent backend**:
+   ```bash
+   cd finance_agent
+   adk api_server --host 0.0.0.0 --port 8000
+   ```
 
-Test that yfinance is working:
+2. **In a new terminal, start the Streamlit frontend**:
+   ```bash
+   streamlit run app.py
+   ```
 
-```python
-import yfinance as yf
-stock = yf.Ticker("AAPL")
-print(stock.info.get("regularMarketPrice"))
-```
+3. **Open your browser** to `http://localhost:8501` and start chatting!
 
-## Usage
-
-### Basic Usage
-
-You can interact with the financial agent using the ADK CLI for terminal-based conversations or the ADK web UI for a browser-based experience.
-
-#### Run in Terminal
-
-To run the agent in your terminal:
+#### Option 2: Backend Only (Terminal)
 
 ```bash
+cd finance_agent
 adk run finance_agent
 ```
 
-You can then type your queries directly in the terminal. To exit, use `Ctrl+C`.
-
-#### Run in Web UI
-
-To launch the interactive developer UI in your browser:
+#### Option 3: Backend Only (Web UI)
 
 ```bash
+cd finance_agent
 adk web
 ```
 
-Open your browser to `http://localhost:8000` (or the URL provided). In the top-left corner, select your agent (`finance_agent` if you renamed the directory, or the default `agent` name if not explicitly changed) from the dropdown. You can then chat with the agent through the web interface.
+## 🎯 Features
 
-### Available Tools
+### Frontend Features (Streamlit UI)
+- 🔄 **Real-time Streaming**: Live streaming of agent responses
+- 🛠️ **Tool Execution Visualization**: See tools execute in real-time
+- 💬 **Modern Chat Interface**: Clean, responsive chat UI
+- 🔧 **Session Management**: Easy session creation and management
+- 💰 **Finance-Optimized**: Proper handling of financial symbols and data
+- 🎯 **Error Handling**: Comprehensive error handling and user feedback
+- 📱 **Responsive Design**: Works on desktop and mobile devices
 
-The financial agent has access to these YFinance tools:
+### Backend Features (Finance Agent)
+- 🔍 **Real-time Stock Data**: Current prices with currency information
+- 📊 **Company Analysis**: Comprehensive profiles and business information
+- 📈 **Historical Data**: Historical prices with customizable time periods
+- 💰 **Financial Fundamentals**: P/E ratios, EPS, debt-to-equity, ROE/ROA
+- 📰 **Market News**: Latest company news and press releases
+- 🔢 **Technical Indicators**: Advanced technical analysis
+- 📋 **Income Statements**: Detailed financial statements
+- 🎯 **Analyst Recommendations**: Professional analyst insights
 
-#### `get_current_stock_price(symbol: str)`
-Get real-time stock price for any symbol.
+## 🛠️ Available Tools
 
-**Example:** "What's the current price of Tesla stock?"
+The finance agent provides these powerful tools accessible through the Streamlit interface:
 
-#### `get_company_info(symbol: str)`
-Get comprehensive company information including business summary, financials, and key metrics.
+| Tool | Description | Example Query |
+|------|-------------|---------------|
+| `get_current_stock_price` | Real-time stock prices | "What's Tesla's current price?" |
+| `get_company_info` | Company profiles and metrics | "Tell me about Microsoft" |
+| `get_historical_stock_prices` | Historical price data | "Apple's performance last year" |
+| `get_stock_fundamentals` | Financial ratios and analysis | "Google's financial fundamentals" |
+| `get_company_news` | Recent news and developments | "Latest Amazon news" |
+| `get_income_statements` | Financial statements | "Netflix income statement" |
+| `get_key_financial_ratios` | Key financial metrics | "Microsoft's financial ratios" |
+| `get_analyst_recommendations` | Professional recommendations | "Apple analyst recommendations" |
+| `get_technical_indicators` | Technical analysis data | "Tesla technical indicators" |
 
-**Example:** "Tell me about Microsoft as a company"
+## 💡 Example Queries
 
-#### `get_historical_stock_prices(symbol: str, period: str, interval: str)`
-Get historical price data with customizable periods and intervals.
+Try these queries in the Streamlit interface:
 
-**Example:** "Show me Apple's stock performance over the last year"
+### 📈 **Stock Analysis**
+- "What's the current price of Apple (AAPL) and how has it performed this year?"
+- "Compare Tesla (TSLA) and Ford (F) financial fundamentals"
+- "Show me Google's (GOOGL) technical indicators for the last 6 months"
 
-#### `get_stock_fundamentals(symbol: str)`
-Get key financial ratios and fundamental analysis data.
+### 🏢 **Company Research**
+- "Give me a comprehensive analysis of Microsoft (MSFT)"
+- "What's Amazon's (AMZN) business model and recent news?"
+- "Analyze Netflix (NFLX) income statement and profitability"
 
-**Example:** "What are Google's financial fundamentals?"
+### 📊 **Market Intelligence**
+- "What are analysts saying about Nvidia (NVDA)?"
+- "Show me the latest developments in the EV sector (TSLA, RIVN, LCID)"
+- "Compare the P/E ratios of major tech stocks"
 
-#### `get_company_news(symbol: str, num_stories: int)`
-Get recent news and press releases for a company.
+## 🔧 Technical Architecture
 
-**Example:** "What's the latest news about Amazon?"
-
-#### `get_income_statements(symbol: str)`
-Get income statements for a given stock symbol.
-
-**Example:** "Show me the income statement for Google (GOOGL)"
-
-#### `get_key_financial_ratios(symbol: str)`
-Get key financial ratios for a given stock symbol.
-
-**Example:** "What are the key financial ratios for Microsoft (MSFT)?"
-
-#### `get_analyst_recommendations(symbol: str)`
-Get analyst recommendations for a given stock symbol.
-
-**Example:** "What are the analyst recommendations for Apple (AAPL)?"
-
-#### `get_technical_indicators(symbol: str, period: str)`
-Get technical indicators for a given stock symbol with customizable periods.
-
-**Example:** "Show me the technical indicators for Tesla (TSLA) over the last 3 months"
-
-### Example Queries
-
-Here are some example queries you can try:
-
-1.  **Stock Prices**
-    - "What's the current stock price of Apple (AAPL)?"
-    - "How is Tesla (TSLA) performing today?"
-
-2.  **Company Analysis**
-    - "Give me detailed information about Microsoft (MSFT)"
-    - "What sector is Amazon (AMZN) in and what do they do?"
-
-3.  **Historical Data**
-    - "Show me Google's (GOOGL) stock performance over the last 6 months"
-    - "What was the historical trend for Netflix (NFLX) in 2023?"
-
-4.  **Financial Fundamentals**
-    - "What are the key financial ratios for Apple (AAPL)?"
-    - "How profitable is Microsoft (MSFT) based on its fundamentals?"
-
-5.  **Income Statements**
-    - "Get the income statement for Amazon (AMZN)."
-    - "Can you provide the income statement for Netflix (NFLX)?"
-
-6.  **Key Financial Ratios**
-    - "What are the key financial ratios for Google (GOOGL)?"
-    - "Show me the key financial ratios for Tesla (TSLA)."
-
-7.  **Analyst Recommendations**
-    - "What are the latest analyst recommendations for Microsoft (MSFT)?"
-    - "Are there any analyst recommendations for Apple (AAPL)?"
-
-8.  **Technical Indicators**
-    - "Show me the technical indicators for Nvidia (NVDA) for the last 6 months."
-    - "What are the technical indicators for AMD (AMD)?"
-
-9.  **Market News**
-    - "What's the latest news about Tesla (TSLA)?"
-    - "Are there any recent developments with Amazon (AMZN)?"
-
-### Supported Stock Symbols
-
-The agent works with any valid stock symbol supported by Yahoo Finance, including:
-
--   **US Stocks**: AAPL, GOOGL, MSFT, TSLA, AMZN, META, NVDA, etc.
--   **International Stocks**: Use appropriate suffixes (e.g., ASML.AS for European stocks)
--   **ETFs**: SPY, QQQ, VTI, etc.
--   **Indices**: ^GSPC (S&P 500), ^IXIC (NASDAQ), etc.
-
-### Deploy as Local API
-
-You can also run your ADK agent as a local API server, allowing for programmatic interaction. This is useful for integrating your agent into other applications or for advanced testing.
-
-#### Run the API Server
-
-Navigate to the `parent_folder` directory in your terminal and run the following command:
-
-```bash
-parent_folder/
-└── my_sample_agent/
-    └── agent.py (or Agent.java)
+### Frontend Architecture (Streamlit)
+```
+Streamlit App (app.py)
+├── Session Management
+├── ADK API Integration (/run_sse endpoint)
+├── Real-time Event Processing
+│   ├── Function Calls (Tool Execution)
+│   ├── Function Responses (Tool Results)
+│   └── Text Streaming (LLM Response)
+└── UI Components
+    ├── Chat Interface
+    ├── Tool Status Displays
+    └── Error Handling
 ```
 
-Launch the server
-
-```bash
-adk api_server --host 0.0.0.0 --port 8000
+### Backend Architecture (Finance Agent)
+```
+Finance Agent (finance_agent/)
+├── agent.py (Main agent logic)
+├── tools.py (YFinance tool implementations)
+├── prompts.py (System prompts and instructions)
+└── ADK Integration
+    ├── OpenRouter LLM
+    ├── Tool Execution Engine
+    └── Session Management
 ```
 
-This will start a local web server, typically on `http://localhost:8000`. You should see output similar to:
+### Data Flow
+1. **User Input** → Streamlit UI
+2. **HTTP Request** → ADK Agent API (`/run_sse`)
+3. **Tool Execution** → YFinance APIs
+4. **LLM Processing** → OpenRouter
+5. **Streaming Response** → Server-Sent Events
+6. **Real-time Display** → Streamlit UI
+
+## 🎨 Development Learnings
+
+### ✅ What Works Well
+
+#### **Proper SSE Event Handling**
+```python
+# Process all parts within a single event
+if "content" in event and event["content"].get("parts"):
+    for part in event["content"]["parts"]:
+        if "functionCall" in part:
+            # Handle tool start
+        elif "functionResponse" in part:
+            # Handle tool result  
+        elif "text" in part:
+            # Handle streaming text
+```
+
+#### **Chronological Tool Display**
+```python
+# Create assistant container FIRST
+with st.chat_message("assistant"):
+    assistant_container = st.container()
+    # All tools created within this container
+```
+
+#### **Financial Data Handling**
+```python
+# Escape dollar signs for Streamlit
+def escape_markdown_dollars(text: str) -> str:
+    return text.replace('$', '\\$')
+```
+
+### ❌ Common Pitfalls
+
+- **Layout Shifts**: Creating tool calls outside assistant container
+- **Event Skipping**: Using `elif` instead of processing all parts
+- **Text Duplication**: Ignoring `partial` flags in streaming
+- **Tool Mismatching**: Not tracking tool IDs properly
+
+## 📁 Project Structure
 
 ```
-INFO:     Started server process [PID]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
+Google-ADK-Agents/
+├── app.py                 # Streamlit frontend application
+├── readme.md             # This comprehensive guide
+├── requirements.txt      # Python dependencies
+└── finance_agent/        # ADK agent backend
+    ├── agent.py          # Main agent configuration
+    ├── tools.py          # YFinance tool implementations
+    ├── prompts.py        # System prompts
+    ├── README.md         # Backend-specific documentation
+    └── __init__.py       # Python package initialization
 ```
 
-#### Interact with the API
+## 🔒 Security & Limitations
 
-Once the API server is running, you can interact with your agent using `curl` commands (or any other HTTP client).
+### Security Considerations
+- **API Keys**: Store OpenRouter API key securely in `.env`
+- **Local Only**: Default configuration runs locally only
+- **No Authentication**: Current setup has no user authentication
 
-1.  **Create a new session:**
+### Data Limitations
+- **Yahoo Finance TOS**: Subject to Yahoo Finance terms of service
+- **Real-time Delays**: Market data may have slight delays
+- **Educational Use**: For educational and research purposes only
+- **Not Financial Advice**: This tool does not provide investment advice
 
-    You can create a new session for your agent. Replace `finance_agent` with your actual agent's directory name if different, and `u_123`, `s_123` with your desired user and session IDs.
+## 🚀 Deployment Options
 
-    ```bash
-    curl -X POST http://localhost:8000/apps/finance_agent/users/u_123/sessions/s_123 \
-      -H "Content-Type: application/json" \
-      -d '{"state": {}}'
-    ```
+### Local Development
+- **Frontend**: `streamlit run app.py`
+- **Backend**: `adk api_server`
 
-    (The `state` object is optional and can be used to set initial session state.)
+### Production Deployment
+- **Streamlit Cloud**: Deploy frontend to Streamlit Cloud
+- **Google Cloud Run**: Deploy ADK agent to Cloud Run
+- **Docker**: Containerize both components
 
-2.  **Send a query to the agent:**
+## 🤝 Contributing
 
-    You can use either the `/run` (returns all events at once) or `/run_sse` (returns Server-Sent Events for streaming) endpoints.
+### Frontend Development
+1. Test SSE event handling with real ADK agents
+2. Verify chronological order of tool calls
+3. Test error scenarios and edge cases
+4. Ensure financial data displays correctly
 
-    **Using `/run` (recommended for most users):**
+### Backend Development
+1. Add new YFinance tools in `tools.py`
+2. Update prompts in `prompts.py` for new capabilities
+3. Test tool integration with ADK framework
+4. Validate financial data accuracy
 
-    ```bash
-    curl -X POST http://localhost:8000/run \
-    -H "Content-Type: application/json" \
-    -d '{
-    "appName": "finance_agent",
-    "userId": "u_123",
-    "sessionId": "s_123",
-    "newMessage": {
-        "role": "user",
-        "parts": [{
-        "text": "What is the current stock price of Apple (AAPL)?"
-        }]
-    }
-    }'
-    ```
+### Development Guidelines
+- Follow ADK best practices for agent development
+- Use proper error handling for both frontend and backend
+- Test with real market data and various stock symbols
+- Maintain backward compatibility with existing tools
 
-    **Using `/run_sse` (for streaming responses):**
+## 📚 Documentation References
 
-    ```bash
-    curl -X POST http://localhost:8000/run_sse \
-    -H "Content-Type: application/json" \
-    -d '{
-    "appName": "finance_agent",
-    "userId": "u_123",
-    "sessionId": "s_123",
-    "newMessage": {
-        "role": "user",
-        "parts": [{
-        "text": "What is the current stock price of Apple (AAPL)?"
-        }]
-    },
-"streaming": true
-}'
-    ```
+- [ADK Documentation](https://google.github.io/adk-docs/)
+- [ADK Testing Guide](https://google.github.io/adk-docs/get-started/testing/#local-testing)
+- [Streamlit Documentation](https://docs.streamlit.io/)
+- [YFinance Documentation](https://pypi.org/project/yfinance/)
 
-    Set `"streaming": true` to enable token-level streaming.
+## 📄 License
 
-    The API will return a JSON object containing the agent's response, including any tool calls and final answers.
-
-## Limitations
-
--   Data is sourced from Yahoo Finance and subject to their terms of service
--   Real-time data may have slight delays
--   Some international stocks may have limited data availability
--   This tool is for educational and research purposes only - not investment advice
-
-## Contributing
-
-Feel free to extend the agent with additional financial tools or improve existing functionality. The modular design makes it easy to add new YFinance capabilities.
-
-## License
-
-This project is for educational purposes. Please respect Yahoo Finance's terms of service when using their data.
+This project is for educational purposes. Please respect:
+- Yahoo Finance's terms of service
+- OpenRouter's usage policies
+- Google ADK licensing terms
 
 ---
 
-**Disclaimer**: This financial agent is for educational and informational purposes only. It does not constitute financial advice. Always consult with qualified financial professionals before making investment decisions.
+**⚠️ Disclaimer**: This application is for educational and informational purposes only. It does not constitute financial advice. Always consult with qualified financial professionals before making investment decisions.
