@@ -191,7 +191,15 @@ You can also run your ADK agent as a local API server, allowing for programmatic
 
 #### Run the API Server
 
-Navigate to the `finance_agent` directory in your terminal and run the following command:
+Navigate to the `parent_folder` directory in your terminal and run the following command:
+
+```bash
+parent_folder/
+└── my_sample_agent/
+    └── agent.py (or Agent.java)
+```
+
+Launch the server
 
 ```bash
 adk api_server --host 0.0.0.0 --port 8000
