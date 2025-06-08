@@ -2,6 +2,10 @@
 
 A complete financial analysis application built with Google Agent Development Kit (ADK), featuring a modern Streamlit web interface and a powerful finance agent backend with real-time market data integration.
 
+# Quick Demo
+
+https://github.com/user-attachments/assets/8b15ce6d-ba75-4117-91cc-11e6b302faa8
+
 ## 🏗️ Architecture Overview
 
 This project consists of two main components:
