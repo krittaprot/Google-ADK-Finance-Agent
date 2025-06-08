@@ -87,6 +87,7 @@ adk web
 - 🔄 **Real-time Streaming**: Live streaming of agent responses
 - 🛠️ **Tool Execution Visualization**: See tools execute in real-time
 - 💬 **Modern Chat Interface**: Clean, responsive chat UI
+- 📋 **Copy to Clipboard**: Easily copy agent responses
 - 🔧 **Session Management**: Easy session creation and management
 - 💰 **Finance-Optimized**: Proper handling of financial symbols and data
 - 🎯 **Error Handling**: Comprehensive error handling and user feedback
@@ -122,20 +123,25 @@ The finance agent provides these powerful tools accessible through the Streamlit
 
 Try these queries in the Streamlit interface:
 
-### 📈 **Stock Analysis**
-- "What's the current price of Apple (AAPL) and how has it performed this year?"
-- "Compare Tesla (TSLA) and Ford (F) financial fundamentals"
-- "Show me Google's (GOOGL) technical indicators for the last 6 months"
+### 📈 **Basic Analysis Prompts**
+- "What is Apple's current stock price and recent performance?"
+- "Compare the financial performance of Tesla vs Ford over the last year"
+- "Analyze Microsoft's quarterly earnings and provide key insights"
+- "What are the top 5 performing tech stocks this month?"
+- "Explain the recent market trends in the renewable energy sector"
+- "What is Amazon's P/E ratio and how does it compare to industry average?"
 
-### 🏢 **Company Research**
-- "Give me a comprehensive analysis of Microsoft (MSFT)"
-- "What's Amazon's (AMZN) business model and recent news?"
-- "Analyze Netflix (NFLX) income statement and profitability"
+### 📊 Advanced Analysis Prompts:
+- "Create a detailed SWOT analysis for Netflix in the current streaming market"
+- "What are the key financial ratios I should look at when evaluating Nvidia's stock?"
+- "Analyze the impact of recent Fed interest rate changes on bank stocks"
+- "Compare the debt-to-equity ratios of major airlines: Delta, United, and Southwest"
 
-### 📊 **Market Intelligence**
-- "What are analysts saying about Nvidia (NVDA)?"
-- "Show me the latest developments in the EV sector (TSLA, RIVN, LCID)"
-- "Compare the P/E ratios of major tech stocks"
+### 🎯 Tips for Better Results:
+- **Be specific**: Instead of "How is Apple doing?", try "What was Apple's revenue growth in Q3 2024?"
+- **Ask for comparisons**: "Compare X vs Y" often provides valuable insights
+- **Request explanations**: Add "explain why" to understand the reasoning behind trends
+- **Use timeframes**: Specify periods like "last quarter", "past year", or "since 2020"
 
 ## 🔧 Technical Architecture
 

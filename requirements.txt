@@ -1,6 +1,9 @@
-streamlit
-requests
-google-adk
-litellm
-python-dotenv
-yfinance
+streamlit==1.45.1
+st-copy-to-clipboard==0.1.6
+requests==2.32.3
+google-adk==1.2.1
+litellm==1.72.2
+python-dotenv==1.1.0
+yfinance==0.2.61
+langchain_community==0.3.24
+tavily-python==0.7.5
