@@ -218,7 +218,7 @@ INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
 
 Once the API server is running, you can interact with your agent using `curl` commands (or any other HTTP client).
 
-1.  **Create a new session (Optional):**
+1.  **Create a new session:**
 
     You can create a new session for your agent. Replace `finance_agent` with your actual agent's directory name if different, and `u_123`, `s_123` with your desired user and session IDs.
 
