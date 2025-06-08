@@ -41,6 +41,7 @@ This project consists of two main components:
    ```env
    OPENROUTER_API_KEY=your_openrouter_api_key_here
    OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+   TAVILY_API_KEY=your_tavily_api_key_here
    ```
 
 3. **Verify YFinance installation**:
@@ -99,6 +100,7 @@ adk web
 - 📈 **Historical Data**: Historical prices with customizable time periods
 - 💰 **Financial Fundamentals**: P/E ratios, EPS, debt-to-equity, ROE/ROA
 - 📰 **Market News**: Latest company news and press releases
+- 🌐 **Web Search**: Real-time web search for general financial news and information
 - 🔢 **Technical Indicators**: Advanced technical analysis
 - 📋 **Income Statements**: Detailed financial statements
 - 🎯 **Analyst Recommendations**: Professional analyst insights
@@ -118,6 +120,7 @@ The finance agent provides these powerful tools accessible through the Streamlit
 | `get_key_financial_ratios` | Key financial metrics | "Microsoft's financial ratios" |
 | `get_analyst_recommendations` | Professional recommendations | "Apple analyst recommendations" |
 | `get_technical_indicators` | Technical analysis data | "Tesla technical indicators" |
+| `tavily_search_results` | Comprehensive web search | "What are the latest financial news headlines for Google?" |
 
 ## 💡 Example Queries
 
@@ -136,6 +139,10 @@ Try these queries in the Streamlit interface:
 - "What are the key financial ratios I should look at when evaluating Nvidia's stock?"
 - "Analyze the impact of recent Fed interest rate changes on bank stocks"
 - "Compare the debt-to-equity ratios of major airlines: Delta, United, and Southwest"
+
+### 🌐 Web Search Prompts:
+- "What are the latest economic indicators for the US market?"
+- "Summarize recent news about inflation and its impact on the stock market."
 
 ### 🎯 Tips for Better Results:
 - **Be specific**: Instead of "How is Apple doing?", try "What was Apple's revenue growth in Q3 2024?"

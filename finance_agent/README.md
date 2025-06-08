@@ -34,6 +34,10 @@ A powerful financial analysis assistant built with Google ADK (Agent Development
 - Market developments and announcements
 - Configurable number of news stories
 
+🌐 **Web Search**
+- Real-time web search for general financial news and information
+- Access to a broader range of financial topics beyond specific stock data
+
 ## Setup
 
 ### 1. Install Dependencies
@@ -44,11 +48,12 @@ pip install -r requirements.txt
 
 ### 2. Environment Configuration
 
-Create a `.env` file in the project root with your OpenRouter API credentials:
+Create a `.env` file in the project root with your OpenRouter and Tavily API credentials:
 
 ```env
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+TAVILY_API_KEY=your_tavily_api_key_here
 ```
 
 ### 3. Verify Installation
@@ -89,7 +94,7 @@ Open your browser to `http://localhost:8000` (or the URL provided). In the top-l
 
 ### Available Tools
 
-The financial agent has access to these YFinance tools:
+The financial agent has access to these YFinance and Tavily tools:
 
 #### `get_current_stock_price(symbol: str)`
 Get real-time stock price for any symbol.
@@ -136,6 +141,11 @@ Get technical indicators for a given stock symbol with customizable periods.
 
 **Example:** "Show me the technical indicators for Tesla (TSLA) over the last 3 months"
 
+#### `tavily_search_results(query: str, max_results: int, search_depth: str, include_answer: bool, include_raw_content: bool, include_images: bool, time_range: str, topic: str)`
+Perform a comprehensive web search using Tavily.
+
+**Example:** "What are the latest financial news headlines for Google?"
+
 ### Example Queries
 
 Here are some example queries you can try:
@@ -175,6 +185,10 @@ Here are some example queries you can try:
 9.  **Market News**
     - "What's the latest news about Tesla (TSLA)?"
     - "Are there any recent developments with Amazon (AMZN)?"
+
+10. **General Financial Search**
+    - "What are the latest economic indicators for the US market?"
+    - "Summarize recent news about inflation and its impact on the stock market."
 
 ### Supported Stock Symbols
 
