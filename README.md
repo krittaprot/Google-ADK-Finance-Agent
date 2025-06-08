@@ -136,61 +136,143 @@ Get technical indicators for a given stock symbol with customizable periods.
 
 **Example:** "Show me the technical indicators for Tesla (TSLA) over the last 3 months"
 
-## Example Queries
+### Example Queries
 
 Here are some example queries you can try:
 
-1. **Stock Prices**
-   - "What's the current stock price of Apple (AAPL)?"
-   - "How is Tesla (TSLA) performing today?"
+1.  **Stock Prices**
+    - "What's the current stock price of Apple (AAPL)?"
+    - "How is Tesla (TSLA) performing today?"
 
-2. **Company Analysis**
-   - "Give me detailed information about Microsoft (MSFT)"
-   - "What sector is Amazon (AMZN) in and what do they do?"
+2.  **Company Analysis**
+    - "Give me detailed information about Microsoft (MSFT)"
+    - "What sector is Amazon (AMZN) in and what do they do?"
 
-3. **Historical Data**
-   - "Show me Google's (GOOGL) stock performance over the last 6 months"
-   - "What was the historical trend for Netflix (NFLX) in 2023?"
+3.  **Historical Data**
+    - "Show me Google's (GOOGL) stock performance over the last 6 months"
+    - "What was the historical trend for Netflix (NFLX) in 2023?"
 
-4. **Financial Fundamentals**
-   - "What are the key financial ratios for Apple (AAPL)?"
-   - "How profitable is Microsoft (MSFT) based on its fundamentals?"
+4.  **Financial Fundamentals**
+    - "What are the key financial ratios for Apple (AAPL)?"
+    - "How profitable is Microsoft (MSFT) based on its fundamentals?"
 
-5. **Income Statements**
-   - "Get the income statement for Amazon (AMZN)."
-   - "Can you provide the income statement for Netflix (NFLX)?"
+5.  **Income Statements**
+    - "Get the income statement for Amazon (AMZN)."
+    - "Can you provide the income statement for Netflix (NFLX)?"
 
-6. **Key Financial Ratios**
-   - "What are the key financial ratios for Google (GOOGL)?"
-   - "Show me the key financial ratios for Tesla (TSLA)."
+6.  **Key Financial Ratios**
+    - "What are the key financial ratios for Google (GOOGL)?"
+    - "Show me the key financial ratios for Tesla (TSLA)."
 
-7. **Analyst Recommendations**
-   - "What are the latest analyst recommendations for Microsoft (MSFT)?"
-   - "Are there any analyst recommendations for Apple (AAPL)?"
+7.  **Analyst Recommendations**
+    - "What are the latest analyst recommendations for Microsoft (MSFT)?"
+    - "Are there any analyst recommendations for Apple (AAPL)?"
 
-8. **Technical Indicators**
-   - "Show me the technical indicators for Nvidia (NVDA) for the last 6 months."
-   - "What are the technical indicators for AMD (AMD)?"
+8.  **Technical Indicators**
+    - "Show me the technical indicators for Nvidia (NVDA) for the last 6 months."
+    - "What are the technical indicators for AMD (AMD)?"
 
-9. **Market News**
-   - "What's the latest news about Tesla (TSLA)?"
-   - "Are there any recent developments with Amazon (AMZN)?"
+9.  **Market News**
+    - "What's the latest news about Tesla (TSLA)?"
+    - "Are there any recent developments with Amazon (AMZN)?"
 
-## Supported Stock Symbols
+### Supported Stock Symbols
 
 The agent works with any valid stock symbol supported by Yahoo Finance, including:
 
-- **US Stocks**: AAPL, GOOGL, MSFT, TSLA, AMZN, META, NVDA, etc.
-- **International Stocks**: Use appropriate suffixes (e.g., ASML.AS for European stocks)
-- **ETFs**: SPY, QQQ, VTI, etc.
-- **Indices**: ^GSPC (S&P 500), ^IXIC (NASDAQ), etc.
+-   **US Stocks**: AAPL, GOOGL, MSFT, TSLA, AMZN, META, NVDA, etc.
+-   **International Stocks**: Use appropriate suffixes (e.g., ASML.AS for European stocks)
+-   **ETFs**: SPY, QQQ, VTI, etc.
+-   **Indices**: ^GSPC (S&P 500), ^IXIC (NASDAQ), etc.
+
+### Deploy as Local API
+
+You can also run your ADK agent as a local API server, allowing for programmatic interaction. This is useful for integrating your agent into other applications or for advanced testing.
+
+#### Run the API Server
+
+Navigate to the `finance_agent` directory in your terminal and run the following command:
+
+```bash
+adk api_server
+```
+
+This will start a local web server, typically on `http://localhost:8000`. You should see output similar to:
+
+```
+INFO:     Started server process [PID]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://localhost:8000 (Press CTRL+C to quit)
+```
+
+#### Interact with the API
+
+Once the API server is running, you can interact with your agent using `curl` commands (or any other HTTP client).
+
+1.  **Create a new session (Optional):**
+
+    You can create a new session for your agent. Replace `finance_agent` with your actual agent's directory name if different, and `u_123`, `s_123` with your desired user and session IDs.
+
+    ```bash
+    curl -X POST http://localhost:8000/apps/finance_agent/users/u_123/sessions/s_123 \
+      -H "Content-Type: application/json" \
+      -d '{"state": {}}'
+    ```
+
+    (The `state` object is optional and can be used to set initial session state.)
+
+2.  **Send a query to the agent:**
+
+    You can use either the `/run` (returns all events at once) or `/run_sse` (returns Server-Sent Events for streaming) endpoints.
+
+    **Using `/run` (recommended for most users):**
+
+    ```bash
+    curl -X POST http://localhost:8000/run \
+    -H "Content-Type: application/json" \
+    -d '{
+    "appName": "finance_agent",
+    "userId": "u_123",
+    "sessionId": "s_123",
+    "newMessage": {
+        "role": "user",
+        "parts": [{
+        "text": "What is the current stock price of Apple (AAPL)?"
+        }]
+    }
+    }'
+    ```
+
+    **Using `/run_sse` (for streaming responses):**
+
+    ```bash
+    curl -X POST http://localhost:8000/run_sse \
+    -H "Content-Type: application/json" \
+    -d '{
+    "appName": "finance_agent",
+    "userId": "u_123",
+    "sessionId": "s_123",
+    "newMessage": {
+        "role": "user",
+        "parts": [{
+        "text": "What is the current stock price of Apple (AAPL)?"
+        }]
+    },
+"streaming": true
+}'
+    ```
+
+    Set `"streaming": true` to enable token-level streaming.
+
+    The API will return a JSON object containing the agent's response, including any tool calls and final answers.
 
 ## Limitations
 
-- Data is sourced from Yahoo Finance and subject to their terms of service
-- Real-time data may have slight delays
-- Some international stocks may have limited data availability
-- This tool is for educational and research purposes only - not investment advice
+-   Data is sourced from Yahoo Finance and subject to their terms of service
+-   Real-time data may have slight delays
+-   Some international stocks may have limited data availability
+-   This tool is for educational and research purposes only - not investment advice
 
 ## Contributing
 
@@ -202,4 +284,4 @@ This project is for educational purposes. Please respect Yahoo Finance's terms o
 
 ---
 
-**Disclaimer**: This financial agent is for educational and informational purposes only. It does not constitute financial advice. Always consult with qualified financial professionals before making investment decisions. 
+**Disclaimer**: This financial agent is for educational and informational purposes only. It does not constitute financial advice. Always consult with qualified financial professionals before making investment decisions.
