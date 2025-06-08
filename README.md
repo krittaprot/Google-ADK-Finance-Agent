@@ -106,14 +106,6 @@ async def main():
 asyncio.run(main())
 ```
 
-### Interactive Example
-
-Run the example script for an interactive session:
-
-```bash
-python example.py
-```
-
 ### Available Tools
 
 The financial agent has access to these YFinance tools:
