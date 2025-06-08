@@ -5,7 +5,9 @@ import os
 import uuid
 import time
 
-st.title("Finance Agent")
+st.title("Finance Agent 📈")
+
+st.divider()
 
 # --- Helper function to escape dollar signs for Streamlit ---
 def escape_markdown_dollars(text: str) -> str:
@@ -28,7 +30,7 @@ if "session_id" not in st.session_state:
     st.session_state.session_id = None
 
 # User input for agent URL and name
-st.sidebar.header("Agent Configuration")
+st.sidebar.header("⚙️ Agent Configuration")
 agent_url = st.sidebar.text_input("ADK Agent API URL", "http://localhost:8000")
 agent_name = st.sidebar.text_input("Agent Name (e.g., finance_agent)", "finance_agent")
 
@@ -52,7 +54,7 @@ def create_session(agent_url, agent_name, user_id):
 
 # Sidebar for session management
 with st.sidebar:
-    st.header("Session Management")
+    st.header("⏳ Session Management")
     if st.session_state.session_id:
         st.success(f"Active session: {st.session_state.session_id}")
         if st.button("➕ New Session"):
@@ -62,7 +64,7 @@ with st.sidebar:
         if st.button("➕ Create Session"):
             create_session(agent_url, agent_name, st.session_state.user_id)
 
-st.divider()
+    st.divider() # Add a divider here
 
 def send_message(message, agent_url, agent_name):
     """
@@ -200,7 +202,7 @@ for msg in st.session_state.messages:
 
 # Input for new messages
 if st.session_state.session_id:  # Only show input if a session exists
-    if user_input := st.chat_input("Ask about a stock..."):
+    if user_input := st.chat_input("Ask about companies..."):
         send_message(user_input, agent_url, agent_name)
 else:
-    st.info("👈 Create a session to start chatting")
+    st.info("👈 Create a session to start chatting 💬")

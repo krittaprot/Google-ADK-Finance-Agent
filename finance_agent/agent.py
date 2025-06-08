@@ -16,9 +16,6 @@ from google.adk.models.lite_llm import LiteLlm
 from .prompts import return_instructions_finance
 from .tools import YFinanceTools
 
-# Enable LiteLLM debugging (optional)
-litellm._turn_on_debug()
-
 # Load environment variables
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")

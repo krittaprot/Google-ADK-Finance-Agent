@@ -206,11 +206,11 @@ class YFinanceTools:
             
             for article in limited_news:
                 formatted_article = {
-                    "title": article.get("title", "N/A"),
-                    "publisher": article.get("publisher", "N/A"),
-                    "link": article.get("link", "N/A"),
-                    "published": article.get("providerPublishTime", "N/A"),
-                    "summary": article.get("summary", "N/A")
+                    "title": article["content"]["title"],
+                    "publisher": article["content"]["provider"]["displayName"],
+                    "link": article["content"]["canonicalUrl"]["url"],
+                    "published": article["content"]["pubDate"],
+                    "summary": article["content"]["summary"]
                 }
                 formatted_news.append(formatted_article)
             
