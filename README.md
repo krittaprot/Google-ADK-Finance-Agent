@@ -194,7 +194,7 @@ You can also run your ADK agent as a local API server, allowing for programmatic
 Navigate to the `finance_agent` directory in your terminal and run the following command:
 
 ```bash
-adk api_server
+adk api_server --host 0.0.0.0 --port 8000
 ```
 
 This will start a local web server, typically on `http://localhost:8000`. You should see output similar to:
