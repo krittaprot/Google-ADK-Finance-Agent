@@ -87,25 +87,6 @@ adk web
 
 Open your browser to `http://localhost:8000` (or the URL provided). In the top-left corner, select your agent (`finance_agent` if you renamed the directory, or the default `agent` name if not explicitly changed) from the dropdown. You can then chat with the agent through the web interface.
 
-#### Programmatic Usage (Python)
-
-For programmatic interaction, you can use the following Python script:
-
-```python
-from agent import root_agent
-import asyncio
-
-async def main():
-    query = "What's the current stock price of Apple (AAPL)?"
-    response = await root_agent.run_async(query)
-    
-    async for event in response:
-        if hasattr(event, 'content') and event.content:
-            print(event.content.text)
-
-asyncio.run(main())
-```
-
 ### Available Tools
 
 The financial agent has access to these YFinance tools:
@@ -203,14 +184,6 @@ The agent works with any valid stock symbol supported by Yahoo Finance, includin
 - **International Stocks**: Use appropriate suffixes (e.g., ASML.AS for European stocks)
 - **ETFs**: SPY, QQQ, VTI, etc.
 - **Indices**: ^GSPC (S&P 500), ^IXIC (NASDAQ), etc.
-
-## Error Handling
-
-The agent includes robust error handling for:
-- Invalid stock symbols
-- Network connectivity issues
-- API rate limits
-- Missing data scenarios
 
 ## Limitations
 
