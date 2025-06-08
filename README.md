@@ -65,6 +65,32 @@ print(stock.info.get("regularMarketPrice"))
 
 ### Basic Usage
 
+You can interact with the financial agent using the ADK CLI for terminal-based conversations or the ADK web UI for a browser-based experience.
+
+#### Run in Terminal
+
+To run the agent in your terminal:
+
+```bash
+adk run finance_agent
+```
+
+You can then type your queries directly in the terminal. To exit, use `Ctrl+C`.
+
+#### Run in Web UI
+
+To launch the interactive developer UI in your browser:
+
+```bash
+adk web
+```
+
+Open your browser to `http://localhost:8000` (or the URL provided). In the top-left corner, select your agent (`finance_agent` if you renamed the directory, or the default `agent` name if not explicitly changed) from the dropdown. You can then chat with the agent through the web interface.
+
+#### Programmatic Usage (Python)
+
+For programmatic interaction, you can use the following Python script:
+
 ```python
 from agent import root_agent
 import asyncio
