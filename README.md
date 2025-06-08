@@ -56,7 +56,7 @@ This project consists of two main components:
 
 1. **Start the ADK agent backend**:
    ```bash
-   cd finance_agent
+   #parent directory
    adk api_server --host 0.0.0.0 --port 8000
    ```
 
@@ -70,14 +70,14 @@ This project consists of two main components:
 #### Option 2: Backend Only (Terminal)
 
 ```bash
-cd finance_agent
+#parent directory
 adk run finance_agent
 ```
 
 #### Option 3: Backend Only (Web UI)
 
 ```bash
-cd finance_agent
+#parent directory
 adk web
 ```
 
