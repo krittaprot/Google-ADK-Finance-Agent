@@ -5,7 +5,77 @@ import os
 import uuid
 import time
 
+#extra functions for the app
+from st_copy_to_clipboard import st_copy_to_clipboard
+
 st.title("Finance Agent 📈")
+
+# Add instructions and example prompts
+st.markdown("""
+### 🚀 How to Use This Finance Agent
+
+This AI-powered finance agent can help you analyze companies, markets, and financial data. Here's how to get started:
+
+1. **Configure your agent** in the sidebar (URL and agent name)
+2. **Create a session** using the sidebar button
+3. **Ask questions** about companies, stocks, or financial topics
+
+#### 💡 Example Prompts to Try:
+
+```
+What is Apple's current stock price and recent performance?
+```
+
+```
+Compare the financial performance of Tesla vs Ford over the last year
+```
+
+```
+Analyze Microsoft's quarterly earnings and provide key insights
+```
+
+```
+What are the top 5 performing tech stocks this month?
+```
+
+```
+Explain the recent market trends in the renewable energy sector
+```
+
+```
+What is Amazon's P/E ratio and how does it compare to industry average?
+```
+
+*💡 Tip: You can copy any example above and paste it into the chat!*
+""")
+
+# Add expandable section with more advanced examples
+with st.expander("🔍 Advanced Examples & Tips"):
+    st.markdown("""
+    #### 📊 Advanced Analysis Prompts:
+    
+    ```
+    Create a detailed SWOT analysis for Netflix in the current streaming market
+    ```
+    
+    ```
+    What are the key financial ratios I should look at when evaluating Nvidia's stock?
+    ```
+    
+    ```
+    Analyze the impact of recent Fed interest rate changes on bank stocks
+    ```
+    
+    ```
+    Compare the debt-to-equity ratios of major airlines: Delta, United, and Southwest
+    ```
+    
+    #### 🎯 Tips for Better Results:
+    - **Be specific**: Instead of "How is Apple doing?", try "What was Apple's revenue growth in Q3 2024?"
+    - **Ask for comparisons**: "Compare X vs Y" often provides valuable insights
+    - **Request explanations**: Add "explain why" to understand the reasoning behind trends
+    - **Use timeframes**: Specify periods like "last quarter", "past year", or "since 2020"
+    """)
 
 st.divider()
 
@@ -63,8 +133,6 @@ with st.sidebar:
         st.warning("No active session.")
         if st.button("➕ Create Session"):
             create_session(agent_url, agent_name, st.session_state.user_id)
-
-    st.divider() # Add a divider here
 
 def send_message(message, agent_url, agent_name):
     """
@@ -179,6 +247,7 @@ def send_message(message, agent_url, agent_name):
             # Final update - remove the blinking cursor
             if final_response_text:
                 final_text_placeholder.markdown(escape_markdown_dollars(final_response_text))
+                st_copy_to_clipboard(escape_markdown_dollars(final_response_text), "Copy response")
             else:
                 # If no text response was received, show a placeholder
                 final_text_placeholder.markdown("*Response completed*")
@@ -202,7 +271,7 @@ for msg in st.session_state.messages:
 
 # Input for new messages
 if st.session_state.session_id:  # Only show input if a session exists
-    if user_input := st.chat_input("Ask about companies..."):
+    if user_input := st.chat_input("Ask about stocks, companies, market trends, or financial analysis..."):
         send_message(user_input, agent_url, agent_name)
 else:
     st.info("👈 Create a session to start chatting 💬")
