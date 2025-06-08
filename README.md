@@ -1,5 +1,7 @@
 # Financial Agent with YFinance Tools
 
+Adapted from: https://docs.agno.com/examples/agents/finance-agent
+
 A powerful financial analysis assistant built with Google ADK (Agent Development Kit) and integrated with YFinance for real-time market data.
 
 ## Features
